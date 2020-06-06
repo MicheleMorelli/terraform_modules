@@ -6,7 +6,6 @@ resource "aws_security_group" "base" {
   }
 }
 
-
 resource "aws_security_group_rule" "allow_ports_to_ips" {
   count             = length(var.port_list)
   type              = "ingress"
