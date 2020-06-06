@@ -1,11 +1,9 @@
 ## Some simple reusable Terraform modules
 
+You can use these modules by referencing this Github repo as a source:
 
 ```
 module sg {                                                                     
-  source = "git::https://github.com/MicheleMorelli/terraform_modules//base_sg"  
-  name   = "my_sg"                                                          
-  port_list = [8080, 8000, 80, 9000]                                                     
-  cidr_list = ["0.0.0.0/0"]                                              
+  source = "git::https://github.com/MicheleMorelli/terraform_modules//<MODULE_NAME>"  
 } 
 ```
