@@ -12,3 +12,14 @@ variable "public_route_cidr_block" {
   type        = string
   description = "the destination CIDR block got the public route"
 }
+
+variable "public_subnets_cidr_blocks_list" {
+  type        = list(string)
+  description = "A list of CIDR ranges of the public subnets of the VPC"
+}
+
+
+variable "private_subnets_cidr_blocks_list" {
+  type        = list(string)
+  description = "A list of CIDR ranges of the private subnets of the VPC"
+}

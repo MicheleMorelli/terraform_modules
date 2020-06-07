@@ -40,10 +40,20 @@ resource "aws_route" "public_route" {
   }
 }
 
-resource "aws_default_route_table" "default" {
+resource "aws_default_route_table" "default-private" {
   default_route_table_id = aws_vpc.this.default_route_table_id
 
   tags = {
-    Name = "${var.name}-default-route-table"
+    Name = "${var.name}-default-private-route-table"
+  }
+}
+
+resource "aws_subnet" "public" {
+  count = length(var.public_subnets_cidr_blocks_list)
+  vpc_id     = aws_vpc.this.id
+  cidr_block = var.public_subnets_cidr_blocks_list[count.index]
+
+  tags = {
+    Name = "${var.name}-public-subnet-${var.public_subnets_cidr_blocks_list[count.index]}"
   }
 }
