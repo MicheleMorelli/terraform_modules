@@ -12,6 +12,14 @@ resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "${var.name}-gw"
+    Name = "${var.name}-igw"
+  }
+}
+
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.this.id
+
+  tags = {
+    Name = "${var.name}-public-rt"
   }
 }
