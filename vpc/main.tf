@@ -78,7 +78,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_route_table_association" "private" {
   count          = length(aws_subnet.private) 
   subnet_id      = aws_subnet.private.*.id[count.index]
-  route_table_id = aws_route_table.default-private.id
+  route_table_id = aws_default_route_table.default-private.id
 
-  depends_on = [aws_subnet.private, aws_route_table.default-private]
+  depends_on = [aws_subnet.private, aws_default_route_table.default-private]
 }
