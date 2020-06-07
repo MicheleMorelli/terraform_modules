@@ -16,7 +16,7 @@ resource "aws_internet_gateway" "this" {
   }
 }
 
-resource "aws_route_table" "public_rt" {
+resource "aws_route_table" "public" {
   vpc_id = aws_vpc.this.id
 
   tags = {
