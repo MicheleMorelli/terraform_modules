@@ -70,3 +70,19 @@ resource "aws_subnet" "private" {
     Name = "${var.name}-private-subnet-${count.index}"
   }
 }
+
+resource "aws_route_table_association" "public" {
+  count = aws_subnet.public.count
+  subnet_id = aws_subnet.public.id 
+  route_table_id = aws_route_table.public.id 
+
+  depends_on = [aws_subnet.public, aws_route_table.public]
+}
+
+resource "aws_route_table_association" "private" {
+  count = aws_subnet.private.count
+  subnet_id = aws_subnet.private.id 
+  route_table_id = aws_route_table.private.id 
+
+  depends_on = [aws_subnet.private, aws_route_table.private]
+}
