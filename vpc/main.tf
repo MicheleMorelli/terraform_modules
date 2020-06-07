@@ -34,10 +34,6 @@ resource "aws_route" "public_route" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.this
   depends_on             = [aws_route_table.public]
-
-  tags = {
-    Name = "${var.name}-public-route"
-  }
 }
 
 resource "aws_default_route_table" "default-private" {
@@ -72,7 +68,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_route_table_association" "public" {
-  count          = aws_subnet.public.count
+  count          = length(aws_subnet.public)
   subnet_id      = aws_subnet.public.*.id[count.index]
   route_table_id = aws_route_table.public.id
 
@@ -80,9 +76,9 @@ resource "aws_route_table_association" "public" {
 }
 
 resource "aws_route_table_association" "private" {
-  count          = aws_subnet.private.count
+  count          = length(aws_subnet.private) 
   subnet_id      = aws_subnet.private.*.id[count.index]
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.default-private.id
 
-  depends_on = [aws_subnet.private, aws_route_table.private]
+  depends_on = [aws_subnet.private, aws_route_table.default-private]
 }
