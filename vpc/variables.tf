@@ -11,6 +11,7 @@ variable "vpc_cidr_range" {
 variable "public_route_cidr_block" {
   type        = string
   description = "the destination CIDR block got the public route"
+  default = "0.0.0.0/0"
 }
 
 variable "public_subnets_cidr_blocks_list" {
